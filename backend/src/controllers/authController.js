@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { StockUser } = require('../models');
+const { StockUser } = require('../models/StockUser');
 
 class AuthController {
   async login(req, res) {
