@@ -18,13 +18,15 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { loading, error } = useSelector((state: RootState) => state.auth);
+  const { loading, error, isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await dispatch(login({ email, password }));
-      navigate('/');
+      const result = await dispatch(login({ email, password }));
+      if (result.meta.requestStatus === 'fulfilled') {
+        navigate('/');
+      }
     } catch {
       // Error is handled by the auth slice
     }
