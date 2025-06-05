@@ -1,4 +1,4 @@
-const { Stock } = require('../models/Stock');
+const Stock = require('../models/Stock');
 
 class StockController {
   async getAllStocks(req, res) {

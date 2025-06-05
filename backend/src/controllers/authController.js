@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { StockUser } = require('../models/StockUser');
+const StockUser = require('../models/StockUser');
 
 class AuthController {
   async login(req, res) {
@@ -33,9 +33,11 @@ class AuthController {
 
   async register(req, res) {
     try {
+      console.log('register', req.body)
       const { email, password, full_name } = req.body;
       
       const existingUser = await StockUser.findOne({ where: { email } });
+      console.log('existingUser', existingUser)
       if (existingUser) {
         return res.status(400).json({ error: 'Email already registered' });
       }
@@ -45,12 +47,14 @@ class AuthController {
         password_hash: password,
         full_name
       });
+      console.log('user', user)
 
       const token = jwt.sign(
         { id: user.id },
         process.env.JWT_SECRET,
         { expiresIn: process.env.JWT_EXPIRES_IN }
       );
+      console.log('token', token)
 
       res.status(201).json({
         user: {
