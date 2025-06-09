@@ -23,9 +23,37 @@ api.interceptors.request.use(
   }
 );
 
-// Response interceptor for handling errors
+// Helper function to parse numeric values
+const parseNumericValues = (data: any): any => {
+  if (Array.isArray(data)) {
+    return data.map(item => parseNumericValues(item));
+  }
+  
+  if (data !== null && typeof data === 'object') {
+    const result: any = {};
+    for (const [key, value] of Object.entries(data)) {
+      // Check if the value is a string that looks like a number
+      if (typeof value === 'string' && /^-?\d*\.?\d+$/.test(value)) {
+        result[key] = parseFloat(value);
+      } else if (typeof value === 'object') {
+        result[key] = parseNumericValues(value);
+      } else {
+        result[key] = value;
+      }
+    }
+    return result;
+  }
+  
+  return data;
+};
+
+// Response interceptor for handling errors and parsing numeric values
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    // Parse numeric values in the response data
+    response.data = parseNumericValues(response.data);
+    return response;
+  },
   (error) => {
     // Only redirect to login if we're not already on the login page
     if (error.response?.status === 401 && !window.location.pathname.includes('/login')) {
