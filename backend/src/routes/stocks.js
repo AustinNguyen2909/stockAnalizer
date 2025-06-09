@@ -7,4 +7,4 @@ router.get('/', auth, stockController.getAllStocks);
 router.get('/:ticker', auth, stockController.getStockByTicker);
 router.post('/import', auth, requireAdmin, stockController.importStocks);
 
-module.exports = router; 
+module.exports = router;                                                                                                                                                                                                                                                                                                                                                    

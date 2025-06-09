@@ -23,8 +23,8 @@ export interface Stock {
 export interface StockResponse {
   success: boolean;
   data: Stock[];
-  total: number;
-  page: number;
+  // total: number;
+  // page: number;
   limit: number;
 }
 

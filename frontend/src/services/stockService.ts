@@ -19,8 +19,8 @@ export const stockService = {
       ...(sort && { sort }),
       ...(order && { order }),
     });
-    const response = await api.get(`/stocks?${params}`);
-    return response.data;
+    const response = await api.get<any, StockResponse>(`/stocks?${params}`);
+    return response;
   },
 
   async getStockByTicker(ticker: string): Promise<Stock> {
