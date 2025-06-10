@@ -53,15 +53,15 @@ const Dashboard = () => {
   const formatNumber = (num: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'VND',
       maximumFractionDigits: 2,
     }).format(num);
   };
 
   const formatMarketCap = (num: number) => {
-    if (num >= 1e12) return `${(num / 1e12).toFixed(2)}T`;
-    if (num >= 1e9) return `${(num / 1e9).toFixed(2)}B`;
-    if (num >= 1e6) return `${(num / 1e6).toFixed(2)}M`;
+    if (num >= 1e12) return `${(num / 1e12).toFixed(2)} Nghìn tỷ`;
+    if (num >= 1e9) return `${(num / 1e9).toFixed(2)} Tỷ`;
+    if (num >= 1e6) return `${(num / 1e6).toFixed(2)} Triệu`;
     return formatNumber(num);
   };
 

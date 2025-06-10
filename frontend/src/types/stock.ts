@@ -12,12 +12,21 @@ export interface Stock {
   beta?: number;
   foreign_ownership?: number;
   leadership?: {
-    ceo?: string;
-    cfo?: string;
-    board_members?: string[];
+    ceo?: LeadershipItem | string;
+    chairman?: LeadershipItem | string;
+    chairwoman?: LeadershipItem | string;
+    vice_chairman?: LeadershipItem | string;
+    deputy_ceos?: string[];
   };
   created_at?: string;
   updated_at?: string;
+}
+
+export interface LeadershipItem {
+  birth_year: number
+ education: string
+  name: string
+  position: string
 }
 
 export interface StockResponse {

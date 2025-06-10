@@ -147,32 +147,70 @@ const StockDetail = () => {
                   <Typography variant="h6" gutterBottom>
                     Leadership
                   </Typography>
-                  <Grid container spacing={3}>
-                    {stock.leadership.ceo && (
-                      <Grid xs={12} md={6}>
-                        <Typography variant="subtitle1">CEO</Typography>
-                        <Typography>{stock.leadership.ceo}</Typography>
-                      </Grid>
-                    )}
-                    {stock.leadership.cfo && (
-                      <Grid xs={12} md={6}>
-                        <Typography variant="subtitle1">CFO</Typography>
-                        <Typography>{stock.leadership.cfo}</Typography>
-                      </Grid>
-                    )}
-                    {stock.leadership.board_members && (
-                      <Grid xs={12}>
-                        <Typography variant="subtitle1">Board Members</Typography>
-                        <List>
-                          {stock.leadership.board_members.map((member, index) => (
-                            <ListItem key={index}>
-                              <ListItemText primary={member} />
-                            </ListItem>
-                          ))}
-                        </List>
-                      </Grid>
-                    )}
-                  </Grid>
+                  {stock.leadership.ceo && typeof stock.leadership.ceo === 'object' ? (
+                    <Grid xs={12} md={6}>
+                      <Typography variant="h6">CEO</Typography>
+                      <Typography>{stock.leadership.ceo.name || ''}</Typography>
+                      <Typography>{stock.leadership.ceo.education || ''}</Typography>
+                      <Typography>{stock.leadership.ceo.position || ''}</Typography>
+                      {!!stock.leadership.ceo.birth_year && <Typography>{"Sinh năm:" + stock.leadership.ceo.birth_year}</Typography>}
+                    </Grid>
+                  ) : typeof stock.leadership.ceo === 'string' ? (
+                    <Grid xs={12} md={6}>
+                      <Typography variant="h6">CEO</Typography>
+                      <Typography>{stock.leadership.ceo}</Typography>
+                    </Grid>
+                  ) : null}
+                  {stock.leadership.chairman && typeof stock.leadership.chairman === 'object' ? (
+                    <Grid xs={12} md={6}>
+                      <Typography variant="h6">Chairman</Typography>
+                      <Typography>{stock.leadership.chairman.name || ''}</Typography>
+                      <Typography>{stock.leadership.chairman.education || ''}</Typography>
+                      <Typography>{stock.leadership.chairman.position || ''}</Typography>
+                      {!!stock.leadership.chairman.birth_year && <Typography>{"Sinh năm:" + stock.leadership.chairman.birth_year}</Typography>}
+                    </Grid>
+                  ) : typeof stock.leadership.chairman === 'string' ? (
+                    <Grid xs={12} md={6}>
+                      <Typography variant="h6">Chairman</Typography>
+                      <Typography>{stock.leadership.chairman}</Typography>
+                    </Grid>
+                  ) : null}
+                  {stock.leadership.chairwoman && typeof stock.leadership.chairwoman === 'object' ? (
+                    <Grid xs={12} md={6}>
+                      <Typography variant="h6">Chairwoman</Typography>
+                      <Typography>{stock.leadership.chairwoman.name || ''}</Typography>
+                      <Typography>{stock.leadership.chairwoman.education || ''}</Typography>
+                      <Typography>{stock.leadership.chairwoman.position || ''}</Typography>
+                      {!!stock.leadership.chairwoman.birth_year && <Typography>{"Sinh năm:" + stock.leadership.chairwoman.birth_year}</Typography>}
+                    </Grid>
+                  ) : typeof stock.leadership.chairwoman === 'string' ? (
+                    <Grid xs={12} md={6}>
+                      <Typography variant="h6">Chairwoman</Typography>
+                      <Typography>{stock.leadership.chairwoman}</Typography>
+                    </Grid>
+                  ) : null}
+                  {stock.leadership.vice_chairman && typeof stock.leadership.vice_chairman === 'object' ? (
+                    <Grid xs={12} md={6}>
+                      <Typography variant="h6">Vice Chairman</Typography>
+                      <Typography>{stock.leadership.vice_chairman.name || ''}</Typography>
+                      <Typography>{stock.leadership.vice_chairman.education || ''}</Typography>
+                      <Typography>{stock.leadership.vice_chairman.position || ''}</Typography>
+                      {!!stock.leadership.vice_chairman.birth_year && <Typography>{"Sinh năm:" + stock.leadership.vice_chairman.birth_year}</Typography>}
+                    </Grid>
+                  ) : typeof stock.leadership.vice_chairman === 'string' ? (
+                    <Grid xs={12} md={6}>
+                      <Typography variant="h6">Vice Chairman</Typography>
+                      <Typography>{stock.leadership.vice_chairman}</Typography>
+                    </Grid>
+                  ) : null}
+                  {stock.leadership.deputy_ceos?.length ? (
+                    <Grid xs={12} md={6}>
+                      <Typography variant="h6">Deputy CEO</Typography>
+                      {stock.leadership.deputy_ceos.map((item) => (
+                        <Typography>{item || ''}</Typography>
+                      ))}
+                    </Grid>
+                  ) : null}
                 </>
               )}
             </CardContent>

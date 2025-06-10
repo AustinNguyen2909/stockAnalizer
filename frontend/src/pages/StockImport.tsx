@@ -101,11 +101,11 @@ const StockImport = () => {
           </Box>
           {result && (
             <Alert
-              severity={result.errors.length > 0 ? 'warning' : 'success'}
+              severity={result?.errors?.length > 0 ? 'warning' : 'success'}
               sx={{ mt: 2 }}
             >
               Import completed: {result.created} created, {result.updated} updated
-              {result.errors.length > 0 && (
+              {result?.errors?.length > 0 && (
                 <Box component="ul" sx={{ mt: 1, mb: 0 }}>
                   {result.errors.map((err, index) => (
                     <li key={index}>
