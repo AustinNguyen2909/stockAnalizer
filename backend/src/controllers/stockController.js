@@ -3,9 +3,29 @@ const Stock = require('../models/Stock');
 class StockController {
   async getAllStocks(req, res) {
     try {
-      const stocks = await Stock.findAll();
-      res.json(stocks);
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 10;
+      const offset = (page - 1) * limit;
+      const sort = req.query.sort || 'ticker';
+      const order = req.query.order || 'asc';
+
+      const { count, rows: stocks } = await Stock.findAndCountAll({
+        limit,
+        offset,
+        order: [[sort, order.toUpperCase()]],
+      });
+
+      res.json({
+        data: stocks,
+        pagination: {
+          total: count,
+          page,
+          limit,
+          totalPages: Math.ceil(count / limit)
+        }
+      });
     } catch (error) {
+      console.error('Error fetching stocks:', error);
       res.status(500).json({ error: 'Server error' });
     }
   }
